@@ -16,7 +16,14 @@ function processLine (line) {
 }
 
 function plusLines (line) {
-  return line.indexOf('+') === -1;
+  var hasPlus = false;
+  for (var i = 0; i < line.length; i++) {
+    if (line[i] === '+') {
+      hasPlus = true;
+      pluses.push(i);
+    }
+  }
+  return !hasPlus;
 }
 
 function blankLines (line) {
@@ -26,7 +33,7 @@ function blankLines (line) {
 function intoPresentableGrid (line) {
   var idx = 0;
   var newL = line.filter(function (ch) {
-    var result = idx % 2 === 0;
+    var result = pluses.indexOf(idx) === -1;
     idx++;
     return result;
   });
@@ -40,8 +47,10 @@ function processFile (err, data) {
   } else {
     var arrData = data.split('\n');
     var size    = parseInt(arrData.shift());
-        arrData = arrData.map(processLine);
     var row     = col = 0;
+
+    blankColSkip = (size % 2 === 0 ? 1 : 2);
+    arrData      = arrData.map(processLine);
 
     arrData.forEach(function processRow (line) {
       col = 0;
@@ -61,12 +70,13 @@ function processFile (err, data) {
       .map(intoPresentableGrid)
       .filter(blankLines);
 
-    fs.writeFile('output.txt', diagonalGrid.join('\n'));
+    console.log(diagonalGrid.join('\n'));
   }
 }
 
-var pluses  = [];
-var fileArg = process.argv[2];
+var pluses       = [];
+var blankColSkip = 2;
+var fileArg      = process.argv[2];
 var diagonalGrid = createArray();
 
 fs.readFile(fileArg, { encoding: 'utf8' }, processFile);
