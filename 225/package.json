@@ -15,7 +15,4 @@
   ],
   "author": "Tarcio Saraiva",
   "license": "MIT",
-  "dependencies": {
-    "q": "^1.4.1"
-  }
 }
