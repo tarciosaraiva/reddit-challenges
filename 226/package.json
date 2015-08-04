@@ -1,0 +1,18 @@
+{
+  "name": "reddit-challenge-226",
+  "version": "1.0.0",
+  "description": "Challenge #226 - Adding fractions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "reddit",
+    "challenge",
+    "diagonal",
+    "maze",
+    "maze"
+  ],
+  "author": "Tarcio Saraiva",
+  "license": "MIT"
+}
